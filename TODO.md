@@ -10,8 +10,8 @@
     - [X] Create repository on GitHub with branching strategy (04/25/25)
 2. **Initial Database Implementation**
     - [ ] Create PostgreSQL tables based on entities
-      - [ ] exercise_types
-      - [ ] training_cycles
+      - [X] exercise_types (04/27/25)
+      - [X] training_cycles (04/27/25)
       - [ ] workout_weeks
       - [ ] user_maxes
       - [ ] workout_days

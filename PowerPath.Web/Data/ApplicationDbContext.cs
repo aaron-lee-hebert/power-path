@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PowerPath.Web.Data.Entities;
+using System.Reflection.Emit;
 
 namespace PowerPath.Web.Data
 {
@@ -22,6 +23,12 @@ namespace PowerPath.Web.Data
 
             // Application Tables
             builder.Entity<ExerciseType>().ToTable("exercise_types");
+            builder.Entity<TrainingCycle>().ToTable("training_cycles");
+
+            // Constraints
+            builder.Entity<TrainingCycle>()
+                .HasIndex(tc => new { tc.UserId, tc.CycleNumber })
+                .IsUnique();
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {
