@@ -11,6 +11,7 @@ namespace PowerPath.Web.Data
         {
             base.OnModelCreating(builder);
 
+            // Identity Tables
             builder.Entity<User>().ToTable("users");
             builder.Entity<IdentityRole<Guid>>().ToTable("roles");
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
@@ -18,6 +19,9 @@ namespace PowerPath.Web.Data
             builder.Entity<IdentityUserToken<Guid>>().ToTable("user_tokens");
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
             builder.Entity<IdentityUserRole<Guid>>().ToTable("user_roles");
+
+            // Application Tables
+            builder.Entity<ExerciseType>().ToTable("exercise_types");
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {
