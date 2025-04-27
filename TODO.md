@@ -3,22 +3,22 @@
 ## Phase 1: Setup & Foundation (2-3 weeks)
 
 1. **Project Setup**
-    [X] Create ASP.NET Core MVC project
-    [X] Configure PostgreSQL connection
-    [X] Set up Entity Framework Core with database-first approach
-    [X] Install necessary NuGet packages
-    [X] Create repository on GitHub with branching strategy
+    [X] Create ASP.NET Core MVC project (04/25/25)
+    [X] Configure PostgreSQL connection (04/25/25)
+    [X] Set up Entity Framework Core with database-first approach (04/25/25)
+    [X] Install necessary NuGet packages (04/25/25)
+    [X] Create repository on GitHub with branching strategy (04/25/25)
 2. **Initial Database Implementation**
     [ ] Run PostgreSQL schema creation script (We're going to be creating objects as needed, not in a 'creation' script)
     [ ] Generate/update EF Core models from database
     [ ] Create database context class
-    [X] Set up migrations
+    [X] Set up migrations (04/25/25)
 3. **Core Architecture**
     [ ] Implement central package management in Visual Studio
     [ ] Implement repository pattern for data access
     [ ] Create service layer for business logic
     [ ] Set up dependency injection
-    [X] Configure authentication & authorization (ASP.NET Identity)
+    [X] Configure authentication & authorization (ASP.NET Identity) (04/25/25)
 4. **Deployment**
     [ ] Create new VPS in Vultr or Digital Ocean (LEMP Stack)
     [ ] Create "staging" environment for testing
