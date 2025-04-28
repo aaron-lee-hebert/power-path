@@ -7,5 +7,11 @@
             Main = 0,
             Assistance
         }
+
+        public enum WeekType
+        {
+            Standard = 0,
+            Deload
+        }
     }
 }

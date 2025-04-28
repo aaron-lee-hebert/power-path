@@ -24,10 +24,15 @@ namespace PowerPath.Web.Data
             // Application Tables
             builder.Entity<ExerciseType>().ToTable("exercise_types");
             builder.Entity<TrainingCycle>().ToTable("training_cycles");
+            builder.Entity<WorkoutWeek>().ToTable("workout_weeks");
 
             // Constraints
             builder.Entity<TrainingCycle>()
                 .HasIndex(tc => new { tc.UserId, tc.CycleNumber })
+                .IsUnique();
+
+            builder.Entity<WorkoutWeek>()
+                .HasIndex(ww => new { ww.TrainingCycleId, ww.WeekNumber })
                 .IsUnique();
 
             foreach (var entity in builder.Model.GetEntityTypes())
