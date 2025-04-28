@@ -25,15 +25,36 @@ namespace PowerPath.Web.Data
             builder.Entity<ExerciseType>().ToTable("exercise_types");
             builder.Entity<TrainingCycle>().ToTable("training_cycles");
             builder.Entity<WorkoutWeek>().ToTable("workout_weeks");
+            builder.Entity<UserMax>().ToTable("user_maxes");
 
             // Constraints
             builder.Entity<TrainingCycle>()
                 .HasIndex(tc => new { tc.UserId, tc.CycleNumber })
                 .IsUnique();
 
+            builder.Entity<TrainingCycle>()
+                .Property(tc => tc.RoundingFactor)
+                .HasPrecision(4, 2);
+
             builder.Entity<WorkoutWeek>()
                 .HasIndex(ww => new { ww.TrainingCycleId, ww.WeekNumber })
                 .IsUnique();
+
+            builder.Entity<UserMax>()
+                .HasIndex(um => new { um.UserId, um.ExerciseTypeId, um.TrainingCycleId })
+                .IsUnique();
+
+            builder.Entity<UserMax>()
+                .Property(um => um.ActualOneRepMax)
+                .HasPrecision(6, 2);
+
+            builder.Entity<UserMax>()
+                .Property(um => um.EstimatedOneRepMax)
+                .HasPrecision(6, 2);
+
+            builder.Entity<UserMax>()
+                .Property(um => um.RoundingFactor)
+                .HasPrecision(4, 2);
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {

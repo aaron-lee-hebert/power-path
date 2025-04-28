@@ -12,8 +12,8 @@
     - [ ] Create PostgreSQL tables based on entities
       - [X] exercise_types (04/27/25)
       - [X] training_cycles (04/27/25)
-      - [ ] workout_weeks
-      - [ ] user_maxes
+      - [X] workout_weeks (04/28/25)
+      - [X] user_maxes (04/28/25)
       - [ ] workout_days
       - [ ] programmed_sets
       - [ ] completed_sets
