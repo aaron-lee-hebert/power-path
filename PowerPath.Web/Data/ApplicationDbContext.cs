@@ -26,6 +26,7 @@ namespace PowerPath.Web.Data
             builder.Entity<TrainingCycle>().ToTable("training_cycles");
             builder.Entity<WorkoutWeek>().ToTable("workout_weeks");
             builder.Entity<UserMax>().ToTable("user_maxes");
+            builder.Entity<WorkoutDay>().ToTable("workout_days");
 
             // Constraints
             builder.Entity<TrainingCycle>()
@@ -55,6 +56,10 @@ namespace PowerPath.Web.Data
             builder.Entity<UserMax>()
                 .Property(um => um.RoundingFactor)
                 .HasPrecision(4, 2);
+
+            builder.Entity<WorkoutDay>()
+                .HasIndex(wd => new { wd.UserId, wd.WorkoutWeekId, wd.WorkoutDate })
+                .IsUnique();
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {

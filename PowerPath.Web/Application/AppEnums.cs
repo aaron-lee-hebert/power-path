@@ -13,5 +13,12 @@
             Standard = 0,
             Deload
         }
+
+        public enum WorkoutDayStatus
+        {
+            Planned = 0,
+            Completed,
+            Skipped
+        }
     }
 }
