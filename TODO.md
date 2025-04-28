@@ -14,13 +14,13 @@
       - [X] training_cycles (04/27/25)
       - [X] workout_weeks (04/28/25)
       - [X] user_maxes (04/28/25)
-      - [ ] workout_days
-      - [ ] programmed_sets
+      - [X] workout_days (04/28/25)
+      - [X] programmed_sets (04/28/25)
       - [ ] completed_sets
       - [ ] progress_records
     - [ ] Create PostgreSQL indexes and other entities
     - [ ] Generate/update EF Core models from database
-    - [ ] Create database context class
+    - [X] Create database context class (04/25/25)
     - [X] Set up migrations (04/25/25)
 3. **Core Architecture**
     - [ ] Implement central package management in Visual Studio
