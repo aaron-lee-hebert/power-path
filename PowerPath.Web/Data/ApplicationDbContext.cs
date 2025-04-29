@@ -28,6 +28,7 @@ namespace PowerPath.Web.Data
             builder.Entity<UserMax>().ToTable("user_maxes");
             builder.Entity<WorkoutDay>().ToTable("workout_days");
             builder.Entity<ProgrammedSet>().ToTable("programmed_sets");
+            builder.Entity<CompletedSet>().ToTable("completed_sets");
 
             // Constraints
             builder.Entity<TrainingCycle>()
@@ -69,6 +70,14 @@ namespace PowerPath.Web.Data
             builder.Entity<ProgrammedSet>()
                 .Property(ps => ps.PercentageOfTrainingMax)
                 .HasPrecision(4, 2);
+
+            builder.Entity<CompletedSet>()
+                .Property(cs => cs.ActualWeight)
+                .HasPrecision(6, 2);
+
+            builder.Entity<CompletedSet>()
+                .HasIndex(cs => new { cs.ProgrammedSetId })
+                .IsUnique();
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {
