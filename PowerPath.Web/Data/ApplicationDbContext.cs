@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PowerPath.Web.Data.Entities;
-using System.Reflection.Emit;
 
 namespace PowerPath.Web.Data
 {
@@ -11,6 +10,8 @@ namespace PowerPath.Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             // Identity Tables
             builder.Entity<User>().ToTable("users");
@@ -22,24 +23,13 @@ namespace PowerPath.Web.Data
             builder.Entity<IdentityUserRole<Guid>>().ToTable("user_roles");
 
             // Application Tables
-            builder.Entity<ExerciseType>().ToTable("exercise_types");
-            builder.Entity<TrainingCycle>().ToTable("training_cycles");
             builder.Entity<WorkoutWeek>().ToTable("workout_weeks");
             builder.Entity<UserMax>().ToTable("user_maxes");
             builder.Entity<WorkoutDay>().ToTable("workout_days");
             builder.Entity<ProgrammedSet>().ToTable("programmed_sets");
-            builder.Entity<CompletedSet>().ToTable("completed_sets");
             builder.Entity<ProgressRecord>().ToTable("progress_records");
 
             // Constraints
-            builder.Entity<TrainingCycle>()
-                .HasIndex(tc => new { tc.UserId, tc.CycleNumber })
-                .IsUnique();
-
-            builder.Entity<TrainingCycle>()
-                .Property(tc => tc.RoundingFactor)
-                .HasPrecision(4, 2);
-
             builder.Entity<WorkoutWeek>()
                 .HasIndex(ww => new { ww.TrainingCycleId, ww.WeekNumber })
                 .IsUnique();
@@ -72,13 +62,6 @@ namespace PowerPath.Web.Data
                 .Property(ps => ps.PercentageOfTrainingMax)
                 .HasPrecision(4, 2);
 
-            builder.Entity<CompletedSet>()
-                .Property(cs => cs.ActualWeight)
-                .HasPrecision(6, 2);
-
-            builder.Entity<CompletedSet>()
-                .HasIndex(cs => new { cs.ProgrammedSetId })
-                .IsUnique();
 
             builder.Entity<ProgressRecord>()
                 .HasIndex(pr => new { pr.UserId, pr.ExerciseTypeId, pr.Weight, pr.Reps })
