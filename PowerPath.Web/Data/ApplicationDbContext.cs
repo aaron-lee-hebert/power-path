@@ -29,6 +29,7 @@ namespace PowerPath.Web.Data
             builder.Entity<WorkoutDay>().ToTable("workout_days");
             builder.Entity<ProgrammedSet>().ToTable("programmed_sets");
             builder.Entity<CompletedSet>().ToTable("completed_sets");
+            builder.Entity<ProgressRecord>().ToTable("progress_records");
 
             // Constraints
             builder.Entity<TrainingCycle>()
@@ -78,6 +79,14 @@ namespace PowerPath.Web.Data
             builder.Entity<CompletedSet>()
                 .HasIndex(cs => new { cs.ProgrammedSetId })
                 .IsUnique();
+
+            builder.Entity<ProgressRecord>()
+                .HasIndex(pr => new { pr.UserId, pr.ExerciseTypeId, pr.Weight, pr.Reps })
+                .IsUnique();
+
+            builder.Entity<ProgressRecord>()
+                .Property(pr => pr.Weight)
+                .HasPrecision(6, 2);
 
             foreach (var entity in builder.Model.GetEntityTypes())
             {
