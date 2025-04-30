@@ -4,14 +4,11 @@ using PowerPath.Web.Data.Entities;
 
 namespace PowerPath.Web.Data.Configurations
 {
-    public class ExerciseTypeConfiguration
+    public class ExerciseTypeConfiguration : IEntityTypeConfiguration<ExerciseType>
     {
-        public class ExerciseTypeConfigurations : IEntityTypeConfiguration<ExerciseType>
+        public void Configure(EntityTypeBuilder<ExerciseType> builder)
         {
-            public void Configure(EntityTypeBuilder<ExerciseType> builder)
-            {
-                builder.ToTable("exercise_types");
-            }
+            builder.ToTable("exercise_types");
         }
     }
 }
