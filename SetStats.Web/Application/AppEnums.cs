@@ -1,24 +1,23 @@
-﻿namespace SetStats.Web.Application
+﻿namespace SetStats.Web.Application;
+
+public static class AppEnums
 {
-    public static class AppEnums
+    public enum WorkoutCategory
     {
-        public enum WorkoutCategory
-        {
-            Main = 0,
-            Assistance
-        }
+        Main = 0,
+        Assistance
+    }
 
-        public enum WeekType
-        {
-            Standard = 0,
-            Deload
-        }
+    public enum WeekType
+    {
+        Standard = 0,
+        Deload
+    }
 
-        public enum WorkoutDayStatus
-        {
-            Planned = 0,
-            Completed,
-            Skipped
-        }
+    public enum WorkoutDayStatus
+    {
+        Planned = 0,
+        Completed,
+        Skipped
     }
 }

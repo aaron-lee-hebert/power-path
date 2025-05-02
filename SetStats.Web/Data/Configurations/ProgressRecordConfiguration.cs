@@ -2,19 +2,16 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SetStats.Web.Data.Entities;
 
-namespace SetStats.Web.Data.Configurations
+namespace SetStats.Web.Data.Configurations;
+
+public class ProgressRecordConfiguration : IEntityTypeConfiguration<ProgressRecord>
 {
-    public class ProgressRecordConfiguration : IEntityTypeConfiguration<ProgressRecord>
+    public void Configure(EntityTypeBuilder<ProgressRecord> builder)
     {
-        public void Configure(EntityTypeBuilder<ProgressRecord> builder)
-        {
-            builder.ToTable("progress_records");
+        _ = builder.ToTable("progress_records");
 
-            builder.HasIndex(pr => new { pr.UserId, pr.ExerciseTypeId, pr.Weight, pr.Reps })
-                .IsUnique();
+        _ = builder.HasIndex(pr => new { pr.UserId, pr.ExerciseTypeId, pr.Weight, pr.Reps }).IsUnique();
 
-            builder.Property(pr => pr.Weight)
-                .HasPrecision(6, 2);
-        }
+        _ = builder.Property(pr => pr.Weight).HasPrecision(6, 2);
     }
 }

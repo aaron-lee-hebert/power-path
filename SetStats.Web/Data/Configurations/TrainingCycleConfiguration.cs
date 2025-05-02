@@ -2,19 +2,18 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SetStats.Web.Data.Entities;
 
-namespace SetStats.Web.Data.Configurations
+namespace SetStats.Web.Data.Configurations;
+
+public class TrainingCycleConfiguration : IEntityTypeConfiguration<TrainingCycle>
 {
-    public class TrainingCycleConfiguration : IEntityTypeConfiguration<TrainingCycle>
+    public void Configure(EntityTypeBuilder<TrainingCycle> builder)
     {
-        public void Configure(EntityTypeBuilder<TrainingCycle> builder)
-        {
-            builder.ToTable("training_cycles");
+        _ = builder.ToTable("training_cycles");
 
-            builder.HasIndex(tc => new { tc.UserId, tc.CycleNumber })
-                .IsUnique();
+        _ = builder.HasIndex(tc => new { tc.UserId, tc.CycleNumber })
+            .IsUnique();
 
-            builder.Property(tc => tc.RoundingFactor)
-                .HasPrecision(4, 2);
-        }
+        _ = builder.Property(tc => tc.RoundingFactor)
+            .HasPrecision(4, 2);
     }
 }
