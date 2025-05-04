@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SetStats.Web.Data;
-using SetStats.Web.Data.Entities;
+using SetStats.Data;
+using SetStats.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

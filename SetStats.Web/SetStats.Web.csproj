@@ -14,9 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Interfaces\" />
-    <Folder Include="Application\DTOs\" />
-    <Folder Include="Application\Services\" />
+    <ProjectReference Include="..\SetStats.Data\SetStats.Data.csproj" />
+    <ProjectReference Include="..\SetStats.Core\SetStats.Core.csproj" />
   </ItemGroup>
 
 </Project>
