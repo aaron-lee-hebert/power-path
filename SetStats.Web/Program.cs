@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using SetStats.Data;
 using SetStats.Core.Entities;
+using SetStats.Core.Interfaces.Repositories;
+using SetStats.Data;
+using SetStats.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Depdendency Injection
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
