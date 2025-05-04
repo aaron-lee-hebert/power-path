@@ -16,6 +16,7 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
 
 // Depdendency Injection
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
 
 builder.Services.AddControllersWithViews();
 
