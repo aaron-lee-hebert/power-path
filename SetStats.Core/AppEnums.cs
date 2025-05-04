@@ -20,4 +20,11 @@ public static class AppEnums
         Completed,
         Skipped
     }
+
+    public enum CycleSequence
+    {
+        Intro = 0,
+        Strength,
+        Deload
+    }
 }

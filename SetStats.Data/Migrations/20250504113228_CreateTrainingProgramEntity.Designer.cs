@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SetStats.Data;
@@ -11,9 +12,11 @@ using SetStats.Data;
 namespace SetStats.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250504113228_CreateTrainingProgramEntity")]
+    partial class CreateTrainingProgramEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -426,50 +429,6 @@ namespace SetStats.Web.Migrations
                     b.ToTable("training_programs", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Core.Entities.TrainingProgramCycle", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<int>("Sequence")
-                        .HasColumnType("integer")
-                        .HasColumnName("sequence");
-
-                    b.Property<Guid>("TrainingCycleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("training_cycle_id");
-
-                    b.Property<Guid>("TrainingProgramId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("training_program_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_training_program_cycles");
-
-                    b.HasIndex("TrainingCycleId")
-                        .HasDatabaseName("ix_training_program_cycles_training_cycle_id");
-
-                    b.HasIndex("TrainingProgramId", "TrainingCycleId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_training_program_cycles_training_program_id_training_cycle_~");
-
-                    b.ToTable("training_program_cycles", (string)null);
-                });
-
             modelBuilder.Entity("SetStats.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -823,27 +782,6 @@ namespace SetStats.Web.Migrations
                         .HasConstraintName("fk_training_programs_users_user_id");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SetStats.Core.Entities.TrainingProgramCycle", b =>
-                {
-                    b.HasOne("SetStats.Core.Entities.TrainingCycle", "TrainingCycle")
-                        .WithMany()
-                        .HasForeignKey("TrainingCycleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_training_program_cycles_training_cycles_training_cycle_id");
-
-                    b.HasOne("SetStats.Core.Entities.TrainingProgram", "TrainingProgram")
-                        .WithMany()
-                        .HasForeignKey("TrainingProgramId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_training_program_cycles_training_programs_training_program_~");
-
-                    b.Navigation("TrainingCycle");
-
-                    b.Navigation("TrainingProgram");
                 });
 
             modelBuilder.Entity("SetStats.Core.Entities.UserMax", b =>
