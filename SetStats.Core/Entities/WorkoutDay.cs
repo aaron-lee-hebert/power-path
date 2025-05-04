@@ -1,6 +1,6 @@
 ﻿using static SetStats.Core.AppEnums;
 
-namespace SetStats.Data.Entities;
+namespace SetStats.Core.Entities;
 
 public class WorkoutDay
 {

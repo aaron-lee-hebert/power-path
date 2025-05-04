@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SetStats.Data.Entities;
+namespace SetStats.Core.Entities;
 
 public class User : IdentityUser<Guid>
 {

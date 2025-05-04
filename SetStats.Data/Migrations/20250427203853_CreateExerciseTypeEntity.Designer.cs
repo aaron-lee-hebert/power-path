@@ -191,7 +191,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("user_tokens", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ExerciseType", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ExerciseType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,7 +217,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("exercise_types", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.User", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -326,7 +326,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -336,7 +336,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -353,7 +353,7 @@ namespace SetStats.Web.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_user_roles_roles_role_id");
 
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,7 +363,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

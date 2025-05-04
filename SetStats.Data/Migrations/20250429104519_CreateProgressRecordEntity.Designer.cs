@@ -191,7 +191,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("user_tokens", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.CompletedSet", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.CompletedSet", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -229,7 +229,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("completed_sets", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ExerciseType", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ExerciseType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,7 +255,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("exercise_types", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ProgrammedSet", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ProgrammedSet", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -300,7 +300,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("programmed_sets", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ProgressRecord", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ProgressRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -345,7 +345,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("progress_records", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.TrainingCycle", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.TrainingCycle", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -387,7 +387,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("training_cycles", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.User", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -484,7 +484,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.UserMax", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.UserMax", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -538,7 +538,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("user_maxes", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.WorkoutDay", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.WorkoutDay", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +578,7 @@ namespace SetStats.Web.Migrations
                     b.ToTable("workout_days", (string)null);
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.WorkoutWeek", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.WorkoutWeek", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -619,7 +619,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -629,7 +629,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -646,7 +646,7 @@ namespace SetStats.Web.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_user_roles_roles_role_id");
 
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -656,7 +656,7 @@ namespace SetStats.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", null)
+                    b.HasOne("SetStats.Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -664,9 +664,9 @@ namespace SetStats.Web.Migrations
                         .HasConstraintName("fk_user_tokens_users_user_id");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.CompletedSet", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.CompletedSet", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.ProgrammedSet", "ProgrammedSet")
+                    b.HasOne("SetStats.Core.Entities.ProgrammedSet", "ProgrammedSet")
                         .WithMany()
                         .HasForeignKey("ProgrammedSetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -676,16 +676,16 @@ namespace SetStats.Web.Migrations
                     b.Navigation("ProgrammedSet");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ProgrammedSet", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ProgrammedSet", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.ExerciseType", "ExerciseType")
+                    b.HasOne("SetStats.Core.Entities.ExerciseType", "ExerciseType")
                         .WithMany()
                         .HasForeignKey("ExerciseTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_programmed_sets_exercise_types_exercise_type_id");
 
-                    b.HasOne("SetStats.Data.Entities.WorkoutDay", "WorkoutDay")
+                    b.HasOne("SetStats.Core.Entities.WorkoutDay", "WorkoutDay")
                         .WithMany()
                         .HasForeignKey("WorkoutDayId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -697,16 +697,16 @@ namespace SetStats.Web.Migrations
                     b.Navigation("WorkoutDay");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.ProgressRecord", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.ProgressRecord", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.ExerciseType", "ExerciseType")
+                    b.HasOne("SetStats.Core.Entities.ExerciseType", "ExerciseType")
                         .WithMany()
                         .HasForeignKey("ExerciseTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_progress_records_exercise_types_exercise_type_id");
 
-                    b.HasOne("SetStats.Data.Entities.User", "User")
+                    b.HasOne("SetStats.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -718,9 +718,9 @@ namespace SetStats.Web.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.TrainingCycle", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.TrainingCycle", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", "User")
+                    b.HasOne("SetStats.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -730,23 +730,23 @@ namespace SetStats.Web.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.UserMax", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.UserMax", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.ExerciseType", "ExerciseType")
+                    b.HasOne("SetStats.Core.Entities.ExerciseType", "ExerciseType")
                         .WithMany()
                         .HasForeignKey("ExerciseTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_user_maxes_exercise_types_exercise_type_id");
 
-                    b.HasOne("SetStats.Data.Entities.TrainingCycle", "TrainingCycle")
+                    b.HasOne("SetStats.Core.Entities.TrainingCycle", "TrainingCycle")
                         .WithMany()
                         .HasForeignKey("TrainingCycleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_user_maxes_training_cycles_training_cycle_id");
 
-                    b.HasOne("SetStats.Data.Entities.User", "User")
+                    b.HasOne("SetStats.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -760,16 +760,16 @@ namespace SetStats.Web.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.WorkoutDay", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.WorkoutDay", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.User", "User")
+                    b.HasOne("SetStats.Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_workout_days_users_user_id");
 
-                    b.HasOne("SetStats.Data.Entities.WorkoutWeek", "WorkoutWeek")
+                    b.HasOne("SetStats.Core.Entities.WorkoutWeek", "WorkoutWeek")
                         .WithMany()
                         .HasForeignKey("WorkoutWeekId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,9 +781,9 @@ namespace SetStats.Web.Migrations
                     b.Navigation("WorkoutWeek");
                 });
 
-            modelBuilder.Entity("SetStats.Data.Entities.WorkoutWeek", b =>
+            modelBuilder.Entity("SetStats.Core.Entities.WorkoutWeek", b =>
                 {
-                    b.HasOne("SetStats.Data.Entities.TrainingCycle", "TrainingCycle")
+                    b.HasOne("SetStats.Core.Entities.TrainingCycle", "TrainingCycle")
                         .WithMany()
                         .HasForeignKey("TrainingCycleId")
                         .OnDelete(DeleteBehavior.Cascade)

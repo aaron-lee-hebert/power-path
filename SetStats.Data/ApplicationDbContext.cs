@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SetStats.Data.Entities;
+using SetStats.Core.Entities;
 
 namespace SetStats.Data;
 

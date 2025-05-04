@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SetStats.Data.Entities;
+using SetStats.Core.Entities;
 
 namespace SetStats.Data.Configurations;
 
