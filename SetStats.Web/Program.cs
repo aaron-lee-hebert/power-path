@@ -16,7 +16,16 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
 
 // Depdendency Injection
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ICompletedSetRepository, CompletedSetRepository>();
+builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
+builder.Services.AddScoped<IProgrammedSetRepository, ProgrammedSetRepository>();
+builder.Services.AddScoped<IProgressRecordRepository, ProgressRecordRepository>();
+builder.Services.AddScoped<ITrainingCycleRepository, TrainingCycleRepository>();
+builder.Services.AddScoped<ITrainingProgramCycleRepository, TrainingProgramCycleRepository>();
 builder.Services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
+builder.Services.AddScoped<IUserMaxRepository, UserMaxRepository>();
+builder.Services.AddScoped<IWorkoutDayRepository, WorkoutDayRepository>();
+builder.Services.AddScoped<IWorkoutWeekRepository, WorkoutWeekRepository>();
 
 builder.Services.AddControllersWithViews();
 

@@ -1,7 +1,7 @@
 ﻿using SetStats.Core.Entities;
 
 namespace SetStats.Core.Interfaces.Repositories;
-public interface ITrainingProgramRepository : IRepository<TrainingProgram>
+public interface IProgressRecordRepository : IRepository<ProgressRecord>
 {
 
 }
