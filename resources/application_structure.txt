@@ -1,0 +1,20 @@
+/Areas (optional, if you separate areas like Admin, User, etc.)
+/Controllers
+/Views
+/ViewModels
+/Models (for lightweight MVC-only models, e.g., binding models)
+/Services
+/Data
+    /Entities
+    /Repositories
+        /Interfaces
+        /Implementations
+/Application
+    /Interfaces
+    /DTOs
+    /Services
+/Migrations
+wwwroot
+Program.cs
+Startup.cs (or your equivalent setup if .NET 8)
+appsettings.json
