@@ -61,13 +61,6 @@ jobs:
       - name: Wait before deploy to avoid Kudu race conditions
         run: sleep 30
 
-      - name: Run EF Core Migrations
-        run: |
-          dotnet tool install --global dotnet-ef
-          dotnet ef database update --project ./SetStats.Data.csproj --startup-project ./SetStats.Web.csproj
-        env:
-          ConnectionStrings__DefaultConnection: ${{ secrets.PRODUCTION_CONNECTION_STRING }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
