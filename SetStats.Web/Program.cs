@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using SetStats.Core.Entities;
 using SetStats.Core.Interfaces.Repositories;
+using SetStats.Core.Interfaces.Services;
 using SetStats.Data;
 using SetStats.Data.Repositories;
+using SetStats.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,11 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Depdendency Injection
+
+// Services
+builder.Services.AddScoped<ITrainingProgramService, TrainingProgramService>();
+
+// Repositories
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICompletedSetRepository, CompletedSetRepository>();
 builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();

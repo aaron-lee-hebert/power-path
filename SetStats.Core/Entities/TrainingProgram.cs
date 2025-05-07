@@ -17,5 +17,5 @@ public class TrainingProgram
     public bool IsActive { get; set; } = true;
     public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public required User User { get; set; }
+    public User User { get; set; } = new User();
 }
