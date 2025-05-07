@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SetStats.Data\SetStats.Data.csproj" />
     <ProjectReference Include="..\SetStats.Core\SetStats.Core.csproj" />
+    <ProjectReference Include="..\SetStats.Services\SetStats.Services.csproj" />
   </ItemGroup>
 
 </Project>
