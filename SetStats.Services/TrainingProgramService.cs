@@ -1,5 +1,5 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using SetStats.Core.DTOs;
 using SetStats.Core.Entities;
 using SetStats.Core.Interfaces.Repositories;
@@ -7,27 +7,18 @@ using SetStats.Core.Interfaces.Services;
 
 namespace SetStats.Services;
 
-public class TrainingProgramService(ITrainingProgramRepository repository, IHttpContextAccessor httpContextAccessor) : ITrainingProgramService
+public class TrainingProgramService(ITrainingProgramRepository repository, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor) : ITrainingProgramService
 {
-    private readonly ITrainingProgramRepository _repository = repository;
-    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
-
-    private Guid CurrentUserId
+    private async Task<Guid> GetCurrentUserIdAsync()
     {
-        get
-        {
-            var userIdStr = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier)
-                ?? throw new UnauthorizedAccessException("User is not logged in.");
-
-            return Guid.TryParse(userIdStr, out var userId)
-                ? userId
-                : throw new UnauthorizedAccessException("Invalid user ID.");
-        }
+        var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext?.User ?? throw new UnauthorizedAccessException("User is not logged in."));
+        return user?.Id ?? throw new UnauthorizedAccessException("User is not logged in.");
     }
 
     public async Task<IEnumerable<TrainingProgramDto>> GetAllTrainingProgramsAsync()
     {
-        var programs = await _repository.GetByUserIdAsync(CurrentUserId);
+        var currentUserId = await GetCurrentUserIdAsync();
+        var programs = await repository.GetByUserIdAsync(currentUserId);
 
         return programs.Select(p => new TrainingProgramDto
         {
@@ -51,18 +42,33 @@ public class TrainingProgramService(ITrainingProgramRepository repository, IHttp
         };
     }
 
+    public async Task<UpdateTrainingProgramDto> GetUpdateTrainingProgramAsync(Guid id)
+    {
+        var program = await GetTrainingProgram(id);
+
+        return new UpdateTrainingProgramDto
+        {
+            Id = program.Id,
+            Name = program.Name,
+            Description = program.Description,
+            IsActive = program.IsActive
+        };
+    }
+
     public async Task AddTrainingProgramAsync(CreateTrainingProgramDto dto)
     {
+        var currentUserId = await GetCurrentUserIdAsync();
         var program = new TrainingProgram
         {
             Id = Guid.NewGuid(),
-            UserId = CurrentUserId,
+            UserId = currentUserId,
             Name = dto.Name,
             Description = dto.Description,
             CreatedAt = DateTime.UtcNow
         };
 
-        await _repository.AddAsync(program);
+        await repository.AddAsync(program);
+        await repository.SaveChangesAsync();
     }
 
     public async Task UpdateTrainingProgramAsync(Guid id, UpdateTrainingProgramDto dto)
@@ -72,20 +78,22 @@ public class TrainingProgramService(ITrainingProgramRepository repository, IHttp
         program.Name = dto.Name;
         program.Description = dto.Description;
 
-        await _repository.SaveChangesAsync();
+        await repository.SaveChangesAsync();
     }
 
     public async Task DeleteTrainingProgramAsync(Guid id)
     {
         var program = await GetTrainingProgram(id);
-        _repository.Remove(program);
-        await _repository.SaveChangesAsync();
+        repository.Remove(program);
+        await repository.SaveChangesAsync();
     }
 
     private async Task<TrainingProgram> GetTrainingProgram(Guid id)
     {
-        var program = await _repository.GetByIdAsync(id);
-        if (program == null || program.UserId != CurrentUserId)
+        var currentUserId = await GetCurrentUserIdAsync();
+        var program = await repository.GetByIdAsync(id);
+
+        if (program == null || program.UserId != currentUserId)
         {
             throw new UnauthorizedAccessException("Access denied.");
         }
