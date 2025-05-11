@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SetStats.Core.Entities;
-using SetStats.Core.Interfaces.Repositories;
-using SetStats.Core.Interfaces.Services;
 using SetStats.Data;
-using SetStats.Data.Repositories;
 using SetStats.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,23 +13,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Depdendency Injection
-
-// Services
-builder.Services.AddScoped<ITrainingProgramService, TrainingProgramService>();
-
-// Repositories
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<ICompletedSetRepository, CompletedSetRepository>();
-builder.Services.AddScoped<IExerciseTypeRepository, ExerciseTypeRepository>();
-builder.Services.AddScoped<IProgrammedSetRepository, ProgrammedSetRepository>();
-builder.Services.AddScoped<IProgressRecordRepository, ProgressRecordRepository>();
-builder.Services.AddScoped<ITrainingCycleRepository, TrainingCycleRepository>();
-builder.Services.AddScoped<ITrainingProgramCycleRepository, TrainingProgramCycleRepository>();
-builder.Services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
-builder.Services.AddScoped<IUserMaxRepository, UserMaxRepository>();
-builder.Services.AddScoped<IWorkoutDayRepository, WorkoutDayRepository>();
-builder.Services.AddScoped<IWorkoutWeekRepository, WorkoutWeekRepository>();
+builder.Services
+    .AddApplicationServices()
+    .AddRepositories();
 
 builder.Services.AddControllersWithViews();
 
