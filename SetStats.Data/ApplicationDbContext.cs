@@ -8,6 +8,7 @@ namespace SetStats.Data;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
 {
     public required DbSet<TrainingProgram> TrainingPrograms { get; set; }
+    public required DbSet<TrainingCycle> TrainingCycles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

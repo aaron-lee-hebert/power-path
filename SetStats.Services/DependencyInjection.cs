@@ -9,7 +9,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         _ = services.AddScoped<ITrainingProgramService, TrainingProgramService>();
-        // Add more services here
+        _ = services.AddScoped<ITrainingCycleService, TrainingCycleService>();
         return services;
     }
 

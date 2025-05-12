@@ -7,10 +7,10 @@ using SetStats.Core.Interfaces.Services;
 namespace SetStats.Web.Controllers;
 
 [Authorize]
-public class TrainingProgramsController(ITrainingProgramService service) : Controller
+public class TrainingCyclesController(ITrainingCycleService service) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> Index() => View(await service.GetAllTrainingProgramsAsync());
+    public async Task<IActionResult> Index() => View(await service.GetAllTrainingCyclesAsync());
 
     [HttpGet]
     public async Task<IActionResult> Details(Guid? id)
@@ -25,13 +25,13 @@ public class TrainingProgramsController(ITrainingProgramService service) : Contr
             return NotFound();
         }
 
-        var trainingProgram = await service.GetTrainingProgramAsync(id.Value);
-        if (trainingProgram == null)
+        var trainingCycle = await service.GetTrainingCycleAsync(id.Value);
+        if (trainingCycle == null)
         {
             return NotFound();
         }
 
-        return View(trainingProgram);
+        return View(trainingCycle);
     }
 
     [HttpGet]
@@ -39,11 +39,11 @@ public class TrainingProgramsController(ITrainingProgramService service) : Contr
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CreateTrainingProgramDto dto)
+    public async Task<IActionResult> Create(CreateTrainingCycleDto dto)
     {
         if (ModelState.IsValid)
         {
-            await service.AddTrainingProgramAsync(dto);
+            await service.AddTrainingCycleAsync(dto);
             return RedirectToAction(nameof(Index));
         }
 
@@ -58,28 +58,28 @@ public class TrainingProgramsController(ITrainingProgramService service) : Contr
             return BadRequest(ModelState);
         }
 
-        var trainingProgram = await service.GetUpdateTrainingProgramAsync(id);
-        if (trainingProgram == null)
+        var trainingCycle = await service.GetUpdateTrainingCycleAsync(id);
+        if (trainingCycle == null)
         {
             return NotFound();
         }
 
-        return View(trainingProgram);
+        return View(trainingCycle);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(Guid id, UpdateTrainingProgramDto dto)
+    public async Task<IActionResult> Edit(Guid id, UpdateTrainingCycleDto dto)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                await service.UpdateTrainingProgramAsync(id, dto);
+                await service.UpdateTrainingCycleAsync(id, dto);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TrainingProgramExists(dto.Id))
+                if (!TrainingCycleExists(dto.Id))
                 {
                     return NotFound();
                 }
@@ -102,13 +102,13 @@ public class TrainingProgramsController(ITrainingProgramService service) : Contr
             return BadRequest(ModelState);
         }
 
-        var trainingProgram = await service.GetTrainingProgramAsync(id);
-        if (trainingProgram == null)
+        var trainingCycle = await service.GetTrainingCycleAsync(id);
+        if (trainingCycle == null)
         {
             return NotFound();
         }
 
-        return View(trainingProgram);
+        return View(trainingCycle);
     }
 
     [HttpPost, ActionName("Delete")]
@@ -120,9 +120,9 @@ public class TrainingProgramsController(ITrainingProgramService service) : Contr
             return BadRequest(ModelState);
         }
 
-        await service.DeleteTrainingProgramAsync(id);
+        await service.DeleteTrainingCycleAsync(id);
         return RedirectToAction(nameof(Index));
     }
 
-    private bool TrainingProgramExists(Guid id) => service.GetTrainingProgramAsync(id) is not null;
+    private bool TrainingCycleExists(Guid id) => service.GetTrainingCycleAsync(id) is not null;
 }

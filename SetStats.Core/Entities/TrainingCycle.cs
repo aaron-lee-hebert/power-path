@@ -10,5 +10,5 @@ public class TrainingCycle
     public decimal RoundingFactor { get; set; } = 2.5M;
     public string? Notes { get; set; }
 
-    public required User User { get; set; }
+    public User? User { get; set; }
 }
