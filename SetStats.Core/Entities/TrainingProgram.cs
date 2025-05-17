@@ -12,4 +12,5 @@ public class TrainingProgram
     public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public User? User { get; set; }
+    public ISet<TrainingCycle> TrainingCycles { get; } = new HashSet<TrainingCycle>();
 }

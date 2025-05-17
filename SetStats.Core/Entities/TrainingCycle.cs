@@ -4,6 +4,7 @@ public class TrainingCycle
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
+    public Guid TrainingProgramId { get; set; }
     public required int CycleNumber { get; set; }
     public required DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
@@ -11,4 +12,5 @@ public class TrainingCycle
     public string? Notes { get; set; }
 
     public User? User { get; set; }
+    public TrainingProgram? TrainingProgram { get; set; }
 }

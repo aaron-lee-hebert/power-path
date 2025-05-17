@@ -21,7 +21,6 @@ public static class DependencyInjection
         _ = services.AddScoped<IProgrammedSetRepository, ProgrammedSetRepository>();
         _ = services.AddScoped<IProgressRecordRepository, ProgressRecordRepository>();
         _ = services.AddScoped<ITrainingCycleRepository, TrainingCycleRepository>();
-        _ = services.AddScoped<ITrainingProgramCycleRepository, TrainingProgramCycleRepository>();
         _ = services.AddScoped<ITrainingProgramRepository, TrainingProgramRepository>();
         _ = services.AddScoped<IUserMaxRepository, UserMaxRepository>();
         _ = services.AddScoped<IWorkoutDayRepository, WorkoutDayRepository>();
